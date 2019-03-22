@@ -121,7 +121,7 @@ public class OrderAdapter extends BaseAdapter {
         holder.pos.setText(String.valueOf(i));
         holder.commodity.setText(String.valueOf(data.get(i).commodity));
         holder.price.setText(data.get(i).sellprice.getString());
-        holder.buyer.setText(data.get(i).buyer);
+        holder.buyer.setText(data.get(i).buyer+"("+data.get(i).location.substring(0,Math.min(9,data.get(i).location.length()))+")");
         holder.quantity.setText(String.valueOf(data.get(i).quantity));
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
         holder.date.setText(format1.format(data.get(i).selltime));

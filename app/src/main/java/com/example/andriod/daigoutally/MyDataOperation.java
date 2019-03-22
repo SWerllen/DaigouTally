@@ -361,7 +361,8 @@ public class MyDataOperation {
         StringBuilder query=new StringBuilder();
         for(int i=0;i<target.length;i++){
             query.append(OrderTable.Cols.COMMODITY+" like '%"+target[i]+"%'"+" or ");
-            query.append(OrderTable.Cols.BUYER+" like '%"+target[i]+"%'"+" and ");
+            query.append(OrderTable.Cols.BUYER+" like '%"+target[i]+"%'"+" or ");
+            query.append(OrderTable.Cols.LOCATION+" like '%"+target[i]+"%'"+" and ");
         }
         query.delete(query.length()-4,query.length());
 

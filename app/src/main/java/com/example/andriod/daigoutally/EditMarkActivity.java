@@ -40,7 +40,9 @@ public class EditMarkActivity extends AppCompatActivity {
     ImageView picture;
     File image;
 
+    String newpath=null;
     static Mark mmark;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +73,8 @@ public class EditMarkActivity extends AppCompatActivity {
             ToastShow("Cannot find the image!");
             return ;
         }
-        mark.filepath=image.getPath();
+        if(newpath!=null)
+            mark.filepath=newpath;
         MyDataOperation operation=new MyDataOperation(getBaseContext());
         if(operation.updateMark(mark)){
             ToastShow("Edit mark successfully!");
@@ -144,6 +147,7 @@ public class EditMarkActivity extends AppCompatActivity {
 
     private void camera() {
         try {
+            newpath=null;
             image = new File(this.getExternalCacheDir(), "DaigouTally_"+System.currentTimeMillis() + ".jpg");
             if(image.exists()){
                 image.delete();
@@ -199,6 +203,7 @@ public class EditMarkActivity extends AppCompatActivity {
                     if (image.exists()) {
                         Bitmap smallBitmap=BitmapThumb.decodeSampledBitmapFromFd(image.getAbsolutePath(),picture.getWidth());
                         picture.setImageBitmap(smallBitmap);
+                        newpath=image.getPath();
                     }
                     break;
                 case RESULT_LOAD_IMAGE:
@@ -209,6 +214,7 @@ public class EditMarkActivity extends AppCompatActivity {
                             ToastShow("Cannot get the image file!");
                         Bitmap smallBitmap=BitmapThumb.decodeSampledBitmapFromFd(image.getAbsolutePath(),picture.getWidth());
                         picture.setImageBitmap(smallBitmap);
+                        newpath=image.getPath();
                     }
                     break;
                 default:
