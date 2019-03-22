@@ -3,7 +3,6 @@ package com.example.andriod.daigoutally;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,11 +25,6 @@ import android.widget.Toast;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.githang.statusbar.StatusBarCompat;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
     MyDataOperation  dataope;
@@ -56,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.CHANGE_WIFI_STATE,
-            Manifest.permission.ACCESS_WIFI_STATE};
+            Manifest.permission.ACCESS_WIFI_STATE,
+            Manifest.permission.READ_PHONE_STATE};
     private static int REQUEST_PERMISSION_CODE = 1;
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -111,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setMapCustomFile(this,"whiteblue.json");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intent=new Intent(getBaseContext(),StartViewActivity.class);
@@ -276,6 +270,7 @@ public class MainActivity extends AppCompatActivity {
             issearch=false;
             btn_add.setVisibility(View.VISIBLE);
             tv_search.setAnimation(AnimationUtils.loadAnimation(this,R.anim.add_left));
+            tv_search.setText("");
             btn_add.setAnimation(AnimationUtils.loadAnimation(this,R.anim.add_enter));
             tv_search.setVisibility(View.INVISIBLE);
             InputMethodManager manager = ((InputMethodManager)getBaseContext().getSystemService(Context.INPUT_METHOD_SERVICE));
@@ -311,39 +306,5 @@ public class MainActivity extends AppCompatActivity {
         btn_search.setVisibility(View.VISIBLE);
         btn_add.setVisibility(View.VISIBLE);
     }
-    private void setMapCustomFile(Context context, String fileName) {
-        SharedPreferences preferences=context.getSharedPreferences("user_set",MODE_PRIVATE);
-        if(!preferences.getString("mapstylepath","null").equals("null")) return;
-        InputStream inputStream = null;
-        FileOutputStream fileOutputStream = null;
-        String moduleName = null;
-        try {
-            inputStream = context.getAssets().open("customConfigDir/" + fileName);
-            byte[] b = new byte[inputStream.available()];
-            inputStream.read(b);
-            moduleName = context.getFilesDir().getAbsolutePath();
-            File file = new File(moduleName + "/" + fileName);
-            if (file.exists()) file.delete();
-            file.createNewFile();
-            fileOutputStream = new FileOutputStream(file);
-            //将自定义样式文件写入本地
-            fileOutputStream.write(b);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-                if (fileOutputStream != null) {
-                    fileOutputStream.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        SharedPreferences.Editor editor=preferences.edit();
-        editor.putString("mapstylepath",moduleName+"/"+fileName);
-        editor.commit();
-    }
+
 }

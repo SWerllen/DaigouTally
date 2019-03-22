@@ -40,7 +40,7 @@ public class MarkFragment extends Fragment {
             public void seeall(int positon) {
                 savePosition();
                 if(positon!=-1){
-                    if(issearch) searchmarks.get(positon).isAll=!marks.get(positon).isAll;
+                    if(issearch) searchmarks.get(positon).isAll=!searchmarks.get(positon).isAll;
                     else marks.get(positon).isAll=!marks.get(positon).isAll;
                 }
             }

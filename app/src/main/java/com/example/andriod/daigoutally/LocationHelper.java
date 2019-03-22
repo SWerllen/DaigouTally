@@ -18,9 +18,10 @@ public class LocationHelper {
     public LocationHelper(Context context, BDAbstractLocationListener listener) {
         mLocationClient = new LocationClient(context.getApplicationContext());
         LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true); // 打开gps
-        option.setCoorType("wgs84"); // 设置坐标类型
+        option.setOpenGps(false); // 打开gps
+        option.setCoorType("bd09ll"); // 设置坐标类型
         option.setScanSpan(1000);
+        option.setPriority(LocationClientOption.GpsFirst);
         mLocationClient.setLocOption(option);
         mLocationClient.registerLocationListener(listener);
         mLocationClient.start();

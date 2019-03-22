@@ -48,8 +48,8 @@ public class BitmapThumb {
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(pathName, options);
         int reqWidth=options.outWidth*reqHeight/options.outHeight;
-        if(reqWidth< 300){
-            reqWidth=300;
+        if(reqWidth< 200){
+            reqWidth=200;
             reqHeight=options.outHeight*reqWidth/options.outWidth;
         }
         options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);

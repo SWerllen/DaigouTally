@@ -47,6 +47,8 @@ public class EditMarkActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_mark);
         picture=findViewById(R.id.picture);
         tv_description=findViewById(R.id.tv_description);
+        mmark.unload();
+        mmark.loadbyheight(1000);
         picture.setImageBitmap(mmark.map);
         tv_description.setText(mmark.description);
         picture.requestFocus();
