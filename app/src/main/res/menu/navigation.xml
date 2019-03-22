@@ -15,7 +15,7 @@
 
     <item
         android:id="@+id/navigation_order"
-        android:icon="@drawable/ic_order"
+        android:icon="@drawable/ic_assignment_24px"
         android:title="@string/title_order" />
 
     <item

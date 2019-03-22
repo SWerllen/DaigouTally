@@ -84,6 +84,7 @@ public class MarkFragment extends Fragment {
                 arrayAdapter= new MarkAdapter(getContext(), marks,markOperation);
                 listView = mRootView.findViewById(R.id.mark_listview);
                 listView.setAdapter(arrayAdapter);
+                new UploadPic().run();
                 Log.i("ONCREATE","Set mark ListView Successfully!");
 
                 mRootView.findViewById(R.id.container_mark_empty).setVisibility(View.INVISIBLE);
@@ -231,5 +232,15 @@ public class MarkFragment extends Fragment {
         issearch=true;
         target=input.split(" ");
         refresh();
+    }
+
+    public class UploadPic extends Thread{
+        @Override
+        public void run() {
+            for(Mark i:marks){
+                i.loadbyheight(300);
+            }
+            super.run();
+        }
     }
 }

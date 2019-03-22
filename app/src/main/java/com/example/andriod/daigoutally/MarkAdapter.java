@@ -67,7 +67,7 @@ public class MarkAdapter extends BaseAdapter {
             holder.decription = (TextView) convertView.findViewById(R.id.mark_description);
             holder.btn=convertView.findViewById(R.id.btn_layout);
             holder.map=convertView.findViewById(R.id.mv_location);
-
+            holder.map.getMap().getUiSettings().setAllGesturesEnabled(false);
             convertView.setTag(holder);
             convertView.findViewById(R.id.card_mark_item).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -127,7 +127,7 @@ public class MarkAdapter extends BaseAdapter {
         }
 
         holder.pos.setText(String.valueOf(i));
-        if(data.get(i).loadbyheight(holder.markmap.getMaxHeight()))
+        if(data.get(i).map!=null||data.get(i).loadbyheight(holder.markmap.getMaxHeight()))
             holder.markmap.setImageBitmap(data.get(i).map);
         String dec=data.get(i).description;
 
@@ -139,7 +139,7 @@ public class MarkAdapter extends BaseAdapter {
             LatLng latLng=new LatLng(data.get(i).location.getLatitude(),data.get(i).location.getLongitude());
             MapStatusUpdate status1 = MapStatusUpdateFactory.newLatLng(latLng);
             holder.map.getMap().setMapStatus(status1);
-            holder.map.getMap().getUiSettings().setAllGesturesEnabled(false);
+
             OverlayOptions option = new MarkerOptions()
                     .position(latLng)
                     .icon(mapicon);
