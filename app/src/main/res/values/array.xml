@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Unit">
+        <item>CNY</item>
+        <item>USD</item>
+        <item>JPY</item>
+        <item>EUR</item>
+        <item>GBP</item>
+        <item>KER</item>
+        <item>HKD</item>
+        <item>AUD</item>
+        <item>CAD</item>
+        <item>DZD</item>
+        <item>ARS</item>
+        <item>MOP</item>
+        <item>ISK</item>
+        <item>DEM</item>
+        <item>FRF</item>
+        <item>ZAR</item>
+        <item>INR</item>
+    </string-array>
+</resources>

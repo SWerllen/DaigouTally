@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">DaigouTally</string>
+    <string name="title_mark">Mark</string>
+    <string name="title_stock">Stock</string>
+    <string name="title_order">Order</string>
+    <string name="title_setting">Setting</string>
+    <string name="title_load">Loading</string>
+
+    <string name="stock_name">Commodity</string>
+    <string name="stock_quantity">Quantity</string>
+    <string name="stock_price">All Payed Price</string>
+    <string name="stock_discount">Discount</string>
+    <string name="stock_exchangerate">Exchange Rate</string>
+    <string name="stock_buydate">Buy Date</string>
+    <string name="stock_rate_check">Check</string>
+
+    <string name="order_commodity">Commodity</string>
+    <string name="order_quantity">Quantity</string>
+    <string name="order_price">All Selled Price</string>
+    <string name="order_buyername">Buyer</string>
+    <string name="order_location">Location</string>
+    <string name="order_phonenumber">Phone</string>
+    <string name="order_phoneregion">Region</string>
+
+    <string name="dialog_make_sure_title">Verify</string>
+    <string name="dialog_make_sure_content">Sure to remove it?</string>
+    <string name="dialog_btn_confirm_text">Sure</string>
+    <string name="dialog_btn_cancel_text">Cancel</string>
+
+    <string name="dialog_choose_state">Change the order state</string>
+
+    <string name="apppackage">com.example.andriod.daigoutally</string>
+
+    <string name="album">Local Album</string>
+    <string name="camera">Open Camera</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="hint_description">Please input your description!</string>
+
+</resources>

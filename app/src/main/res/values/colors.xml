@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#64B2FF</color>
+    <color name="colorPrimaryDark">#454545</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorBackground">#F9F9F9</color>
+    <color name="colorText">#707070</color>
+    <color name="colorMainText">#010101</color>
+    <color name="colorNoshipeditem">#FF9494</color>
+    <color name="colorNoterecieveitem">#FFE6AD</color>
+    <color name="colorHasrecieveitem">#C0FFB3</color>
+</resources>
