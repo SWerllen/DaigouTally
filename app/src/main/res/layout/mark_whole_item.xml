@@ -150,20 +150,20 @@
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintWidth_percent="0.6" />
 
-            <com.google.android.gms.maps.MapView
+            <com.baidu.mapapi.map.MapView
                 android:id="@+id/mv_location"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="150dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mark_map"
-                app:layout_constraintWidth_percent="0.6" />
+                app:layout_constraintTop_toBottomOf="@+id/mark_description"
+                app:layout_constraintWidth_percent="0.8" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 

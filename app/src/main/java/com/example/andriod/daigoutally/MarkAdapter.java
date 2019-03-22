@@ -1,6 +1,7 @@
 package com.example.andriod.daigoutally;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.View;
@@ -10,9 +11,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.MapView;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.model.LatLng;
 
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MarkAdapter extends BaseAdapter {
     private Context context;
@@ -20,7 +30,8 @@ public class MarkAdapter extends BaseAdapter {
     public int lastposition=-1;
     private  int showexit=-1;
     private boolean[] isshowbtn;
-
+    BitmapDescriptor mapicon = BitmapDescriptorFactory
+            .fromResource(R.drawable.icon_gcoding);
     MarkOperation markOperation;
     public MarkAdapter(Context context, List<Mark> data,MarkOperation markOperation) {
         this.context = context;
@@ -59,6 +70,13 @@ public class MarkAdapter extends BaseAdapter {
             holder.decription = (TextView) convertView.findViewById(R.id.mark_description);
             holder.btn=convertView.findViewById(R.id.btn_layout);
             holder.map=convertView.findViewById(R.id.mv_location);
+
+            SharedPreferences preferences=context.getSharedPreferences("user_set",MODE_PRIVATE);
+            String path=preferences.getString("mapstylepath","null");
+            if(!path.equals("null")){
+                holder.map.setMapCustomEnable(true);
+                holder.map.setCustomMapStylePath(path);
+            }
             convertView.setTag(holder);
             convertView.findViewById(R.id.card_mark_item).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -124,11 +142,22 @@ public class MarkAdapter extends BaseAdapter {
         if(data.get(i).isAll){
             holder.decription.setText(dec);
             holder.map.setVisibility(View.VISIBLE);
+            holder.map.onResume();
+            holder.map.getMap().clear();
+            LatLng latLng=new LatLng(data.get(i).location.getLatitude(),data.get(i).location.getLongitude());
+            MapStatusUpdate status1 = MapStatusUpdateFactory.newLatLng(latLng);
+            holder.map.getMap().setMapStatus(status1);
+            holder.map.getMap().getUiSettings().setAllGesturesEnabled(false);
+            OverlayOptions option = new MarkerOptions()
+                    .position(latLng)
+                    .icon(mapicon);
+            holder.map.getMap().addOverlay(option);
         }
         else{
             String add=(dec.length()>200)? "...":"";
             holder.decription.setText(dec.substring(0,Math.min(dec.length(),100))+add);
             holder.map.setVisibility(View.GONE);
+            holder.map.onPause();
         }
         return convertView;
     }

@@ -10,9 +10,11 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,6 +22,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="6mL8IMQSnT5vG6BDRGu756B0jeGU35yT" />
+        <service android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"/>
         <activity android:name=".StartViewActivity" android:screenOrientation="portrait">
         </activity>
         <activity android:name=".EditMarkActivity" />
@@ -63,9 +71,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="e573725e8d63486cbea3646a58e63ac4">
-            //开发者申请的key
-        </meta-data>
+
     </application>
 
 </manifest>

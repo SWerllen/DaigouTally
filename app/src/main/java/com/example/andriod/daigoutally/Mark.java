@@ -1,6 +1,5 @@
 package com.example.andriod.daigoutally;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.location.Location;
 
@@ -27,12 +26,5 @@ public class Mark {
     }
     public void unload(){
         map=null;
-    }
-
-    public boolean initLocation(Context context){
-        location=LocationUtils.getLocation(context);
-        if(location==null)
-            return false;
-        return true;
     }
 }
