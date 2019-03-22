@@ -52,11 +52,15 @@ public class dbDescription {
             public static final String DESCRIPTION= "description";
             public static final String TIME= "time";
             public static final String FILE= "filepath";
+            public static final String LONGITUDE="longitude";
+            public static final String LATITUDE="latitude";
 
             public static final String IDDEC= " INTEGER PRIMARY KEY AUTOINCREMENT ";
             public static final String DESCRIPTIONDEC= " TEXT ";
             public static final String TIMEDEC = " INTEGER ";
             public static final String FILEDEC = " TEXT ";
+            public static final String LONGITUDEDEC=" DOUBLE ";
+            public static final String LATITUDEDEC=" DOUBLE ";
         }
     }
 }

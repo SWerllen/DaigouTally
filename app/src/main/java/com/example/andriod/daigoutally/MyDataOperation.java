@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
 import android.util.Log;
 
 import com.example.andriod.daigoutally.dbDescription.OrderTable;
@@ -60,6 +61,8 @@ public class MyDataOperation {
                     dbDescription.MarkTable.Cols.ID + dbDescription.MarkTable.Cols.IDDEC+ ", " +
                     dbDescription.MarkTable.Cols.FILE + dbDescription.MarkTable.Cols.FILEDEC +", " +
                     dbDescription.MarkTable.Cols.TIME + dbDescription.MarkTable.Cols.TIMEDEC +", " +
+                    dbDescription.MarkTable.Cols.LATITUDE + dbDescription.MarkTable.Cols.LATITUDEDEC +", " +
+                    dbDescription.MarkTable.Cols.LONGITUDE + dbDescription.MarkTable.Cols.LONGITUDEDEC +", " +
                     dbDescription.MarkTable.Cols.DESCRIPTION + dbDescription.MarkTable.Cols.DESCRIPTIONDEC  +")");
         }
     }
@@ -228,6 +231,8 @@ public class MyDataOperation {
         values.put(dbDescription.MarkTable.Cols.DESCRIPTION, mark.description);
         values.put(dbDescription.MarkTable.Cols.TIME, mark.date.getTime());
         values.put(dbDescription.MarkTable.Cols.FILE, mark.filepath);
+        values.put(dbDescription.MarkTable.Cols.LONGITUDE,mark.location.getLongitude());
+        values.put(dbDescription.MarkTable.Cols.LATITUDE,mark.location.getLatitude());
         return values;
     }
 
@@ -386,12 +391,16 @@ public class MyDataOperation {
             String description=getString(getColumnIndex(dbDescription.MarkTable.Cols.DESCRIPTION));
             long date = getLong(getColumnIndex(dbDescription.MarkTable.Cols.TIME));
             String filepath= getString(getColumnIndex(dbDescription.MarkTable.Cols.FILE));
+            Location location=new Location("dummyprovider");
+            location.setLatitude(getDouble(getColumnIndex(dbDescription.MarkTable.Cols.LATITUDE)));
+            location.setLongitude(getDouble(getColumnIndex(dbDescription.MarkTable.Cols.LONGITUDE)));
 
             Mark mark=new Mark();
             mark.date=new Date(date);
             mark.id=markid;
             mark.filepath=filepath;
             mark.description=description;
+            mark.location=location;
             return mark;
         }
     }

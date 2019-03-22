@@ -44,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA};
+            Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION};
     private static int REQUEST_PERMISSION_CODE = 1;
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -104,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent=new Intent(getBaseContext(),StartViewActivity.class);
+        startActivity(intent);
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M)
             StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorBackground),true);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {

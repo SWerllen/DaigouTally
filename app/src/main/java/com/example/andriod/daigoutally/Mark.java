@@ -1,6 +1,8 @@
 package com.example.andriod.daigoutally;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.location.Location;
 
 import java.io.File;
 import java.util.Date;
@@ -12,6 +14,7 @@ public class Mark {
     public Bitmap map;
     public String filepath;
     public boolean isAll=false;
+    public Location location;
 
     public boolean loadbyheight(int height){
         if(map!=null&&map.getHeight()>0) return true;
@@ -24,5 +27,12 @@ public class Mark {
     }
     public void unload(){
         map=null;
+    }
+
+    public boolean initLocation(Context context){
+        location=LocationUtils.getLocation(context);
+        if(location==null)
+            return false;
+        return true;
     }
 }

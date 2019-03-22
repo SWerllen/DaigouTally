@@ -1,12 +1,11 @@
 package com.example.andriod.daigoutally;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.example.andriod.daigoutally.dbDescription.StockTable;
+
 import com.example.andriod.daigoutally.dbDescription.OrderTable;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import com.example.andriod.daigoutally.dbDescription.StockTable;
 
 public class MyDataHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
@@ -42,6 +41,8 @@ public class MyDataHelper extends SQLiteOpenHelper {
                 dbDescription.MarkTable.Cols.ID + dbDescription.MarkTable.Cols.IDDEC+ ", " +
                 dbDescription.MarkTable.Cols.FILE + dbDescription.MarkTable.Cols.FILEDEC +", " +
                 dbDescription.MarkTable.Cols.TIME + dbDescription.MarkTable.Cols.TIMEDEC +", " +
+                dbDescription.MarkTable.Cols.LATITUDE + dbDescription.MarkTable.Cols.LATITUDEDEC +", " +
+                dbDescription.MarkTable.Cols.LONGITUDE + dbDescription.MarkTable.Cols.LONGITUDEDEC +", " +
                 dbDescription.MarkTable.Cols.DESCRIPTION + dbDescription.MarkTable.Cols.DESCRIPTIONDEC  +")");
     }
 

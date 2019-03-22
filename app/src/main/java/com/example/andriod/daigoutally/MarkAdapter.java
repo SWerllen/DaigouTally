@@ -10,6 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.MapView;
+
 import java.util.List;
 
 public class MarkAdapter extends BaseAdapter {
@@ -56,6 +58,7 @@ public class MarkAdapter extends BaseAdapter {
             holder.markmap = convertView.findViewById(R.id.mark_map);
             holder.decription = (TextView) convertView.findViewById(R.id.mark_description);
             holder.btn=convertView.findViewById(R.id.btn_layout);
+            holder.map=convertView.findViewById(R.id.mv_location);
             convertView.setTag(holder);
             convertView.findViewById(R.id.card_mark_item).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -120,14 +123,17 @@ public class MarkAdapter extends BaseAdapter {
         String dec=data.get(i).description;
         if(data.get(i).isAll){
             holder.decription.setText(dec);
+            holder.map.setVisibility(View.VISIBLE);
         }
         else{
             String add=(dec.length()>200)? "...":"";
             holder.decription.setText(dec.substring(0,Math.min(dec.length(),100))+add);
+            holder.map.setVisibility(View.GONE);
         }
         return convertView;
     }
     static class ViewHold {
+        MapView map;
         TextView pos;
         ImageView markmap;
         TextView decription;

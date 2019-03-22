@@ -22,9 +22,9 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-        import com.githang.statusbar.StatusBarCompat;
+import com.githang.statusbar.StatusBarCompat;
 
-        import java.io.File;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -70,6 +70,13 @@ public class AddMarkActivity extends AppCompatActivity {
             ToastShow("Cannot find the image!");
             return ;
         }
+        if(mark.location==null){
+            if(!mark.initLocation(this)){
+                ToastShow("Cannot get the location, please open the GPS!");
+                return;
+            }
+        }
+
         mark.filepath=image.getPath();
         MyDataOperation operation=new MyDataOperation(getBaseContext());
         if(operation.addMark(mark)){
