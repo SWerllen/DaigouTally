@@ -50,6 +50,7 @@
             android:hint="@string/hint_description"
             android:textColor="@color/colorText"
             android:textSize="16sp"
+            android:textCursorDrawable="@color/design_default_color_primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.9"

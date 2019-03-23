@@ -101,6 +101,11 @@ public class AddMarkActivity extends AppCompatActivity {
             ToastShow("Cannot find the image!");
             return ;
         }
+
+        Location temp=locationHelper.getLocationFromFile(image.getPath());
+        if(temp!=null) mLocation=temp;
+        else Log.i("LoadLocationfromFile:","Can't get the location from file.");
+
         if(mark.location==null){
             if(mLocation==null){
                 ToastShow("Cannot get the location, please open the GPS!");

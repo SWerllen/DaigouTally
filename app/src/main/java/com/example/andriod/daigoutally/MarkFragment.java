@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import java.util.List;
@@ -58,9 +62,45 @@ public class MarkFragment extends Fragment {
                 Intent intent=new Intent(getContext(),EditMarkActivity.class);
                 startActivity(intent);
             }
+
+            @Override
+            public void seepic(int position) {
+                showPopueWindow(position);
+            }
         };
         lazyLoad();
         return mRootView;
+    }
+
+    private void showPopueWindow(int pos){
+        View popView = View.inflate(getContext(),R.layout.popuppic,null);
+
+        int weight = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels*1/3;
+
+        ImageView temp=popView.findViewById(R.id.big_picture);
+        marks.get(pos).unload();
+        marks.get(pos).loadbyheight(1000);
+        temp.setImageBitmap(marks.get(pos).map);
+        marks.get(pos).unload();
+        marks.get(pos).loadbyheight(300);
+        final PopupWindow popupWindow = new PopupWindow(popView,weight,height);
+        popupWindow.setAnimationStyle(R.style.PopupAnimation);
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+                lp.alpha = 1.0f;
+                getActivity().getWindow().setAttributes(lp);
+            }
+        });
+        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+        lp.alpha = 0.5f;
+        getActivity().getWindow().setAttributes(lp);
+        popupWindow.showAtLocation(popView, Gravity.CENTER,0,50);
     }
     public void lazyLoad() {
         if (getUserVisibleHint() && mIsPrepared && !mIsInited) {
@@ -242,5 +282,13 @@ public class MarkFragment extends Fragment {
             }
             super.run();
         }
+    }
+
+    public void closedetails(){
+        for(Mark i:marks){
+            i.isAll=false;
+        }
+        arrayAdapter.hidetool();
+        refresh();
     }
 }

@@ -75,29 +75,30 @@ public class MainActivity extends AppCompatActivity {
             outSet();
             switch (item.getItemId()) {
                 case R.id.navigation_stock:
+                    jiemian=Jiemian.STOCK;
                     hidothers(transaction);
                     transaction.show(mStockFragment);
                     transaction.commit();
-                    jiemian=Jiemian.STOCK;
                     return true;
                 case R.id.navigation_order:
+                    jiemian=Jiemian.ORDER;
                     hidothers(transaction);
                     transaction.show(mOrderFragment);
                     transaction.commit();
-                    jiemian=Jiemian.ORDER;
                     return true;
                 case R.id.navigation_mark:
+                    jiemian=Jiemian.MARK;
                     hidothers(transaction);
                     transaction.show(mMarkFragment);
                     transaction.commit();
-                    jiemian=Jiemian.MARK;
+                    mMarkFragment.closedetails();
                     return true;
                 case R.id.navigation_setting:
+                    jiemian=Jiemian.SET;
                     inSet();
                     hidothers(transaction);
                     transaction.show(mSetFragment);
                     transaction.commit();
-                    jiemian=Jiemian.SET;
                     return true;
             }
             return false;
@@ -162,16 +163,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void hidothers(FragmentTransaction transaction){
-        if(mOrderFragment != null){
+        if(mOrderFragment != null&&jiemian!=Jiemian.ORDER){
             transaction.hide(mOrderFragment);
         }
-        if(mStockFragment != null){
+        if(mStockFragment != null&&jiemian!=Jiemian.STOCK){
             transaction.hide(mStockFragment);
         }
-        if(mMarkFragment != null){
+        if(mMarkFragment != null&&jiemian!=Jiemian.MARK){
             transaction.hide(mMarkFragment);
         }
-        if(mSetFragment!=null){
+        if(mSetFragment!=null&&jiemian!=Jiemian.SET){
             transaction.hide(mSetFragment);
         }
     }

@@ -89,6 +89,16 @@ public class MarkAdapter extends BaseAdapter {
                     notifyDataSetChanged();
                 }
             });
+            convertView.findViewById(R.id.card_mark_item).setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    TextView tv = (TextView) v.findViewById(R.id.tv_markpos);
+                    int pos = Integer.valueOf(tv.getText().toString());
+                    Log.i("LONGCLICKCARD:", String.format("You longclick %d item!", pos));
+                    markOperation.seepic(pos);
+                    return false;
+                }
+            });
 
             convertView.findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -167,5 +177,6 @@ public class MarkAdapter extends BaseAdapter {
         void seeall(int positon);
         void delete(int positon);
         void edit(int positon);
+        void seepic(int position);
     }
 }
