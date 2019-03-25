@@ -37,6 +37,23 @@
         app:layout_constraintVertical_bias="0.0">
 
         <Button
+            android:id="@+id/btn_help"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/dbtn_help"
+            android:onClick="onClickHelp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.94"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
             android:id="@+id/btn_search"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="24dp"

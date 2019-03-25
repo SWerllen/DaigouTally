@@ -50,7 +50,6 @@ public class AddMarkActivity extends AppCompatActivity {
 
     private static final int RESULT_LOAD_IMAGE=1;
     private static final int RESULT_CAMERA_IMAGE=2;
-    private static final int RESULT_ZOOM=3;
     LocationHelper locationHelper;
     private static final String AUTHORITY=BuildConfig.APPLICATION_ID+".provider";
 

@@ -2,6 +2,7 @@ package com.example.andriod.daigoutally;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn_add;
     Button btn_search;
+    Button btn_help;
     TextView tv_search;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -46,21 +48,23 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             FragmentTransaction transaction=mFragmentManager.beginTransaction();
-            outSet();
             switch (item.getItemId()) {
                 case R.id.navigation_stock:
+                    outSet();
                     jiemian=Jiemian.STOCK;
                     hidothers(transaction);
                     transaction.show(mStockFragment);
                     transaction.commit();
                     return true;
                 case R.id.navigation_order:
+                    outSet();
                     jiemian=Jiemian.ORDER;
                     hidothers(transaction);
                     transaction.show(mOrderFragment);
                     transaction.commit();
                     return true;
                 case R.id.navigation_mark:
+                    outSet();
                     jiemian=Jiemian.MARK;
                     hidothers(transaction);
                     transaction.show(mMarkFragment);
@@ -68,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
                     mMarkFragment.closedetails();
                     return true;
                 case R.id.navigation_setting:
-                    jiemian=Jiemian.SET;
                     inSet();
+                    jiemian=Jiemian.SET;
                     hidothers(transaction);
                     transaction.show(mSetFragment);
                     transaction.commit();
@@ -83,6 +87,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences shared=getSharedPreferences("user_set", MODE_PRIVATE);
+        boolean isfer=shared.getBoolean("isfer", true);
+        if(isfer){
+            Intent helpintent=new Intent(getBaseContext(),HelpActivity.class);
+            startActivity(helpintent);
+            SharedPreferences.Editor editor=shared.edit();
+            editor.putBoolean("isfer",false);
+            editor.commit();
+        }
+
         Intent intent=new Intent(getBaseContext(),StartViewActivity.class);
         startActivity(intent);
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M)
@@ -92,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
         btn_search=findViewById(R.id.btn_search);
         tv_search=findViewById(R.id.tv_search);
         navigationView=findViewById(R.id.navigation);
+        btn_help=findViewById(R.id.btn_help);
+
         tv_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -270,16 +286,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void inSet(){
+        if(jiemian==Jiemian.SET) return;
         tv_search.setVisibility(View.INVISIBLE);
         btn_search.setAnimation(AnimationUtils.loadAnimation(this,R.anim.add_left));
         btn_add.setAnimation(AnimationUtils.loadAnimation(this,R.anim.add_left));
+        btn_help.setAnimation(AnimationUtils.loadAnimation(this,R.anim.add_enter));
         btn_search.setVisibility(View.INVISIBLE);
         btn_add.setVisibility(View.INVISIBLE);
+        btn_help.setVisibility(View.VISIBLE);
     }
     private void outSet(){
+        if(jiemian!=Jiemian.SET) return;
         btn_search.setAnimation(AnimationUtils.loadAnimation(this,R.anim.add_enter));
         btn_add.setAnimation(AnimationUtils.loadAnimation(this,R.anim.add_enter));
+        btn_help.setAnimation(AnimationUtils.loadAnimation(this,R.anim.add_left));
         btn_search.setVisibility(View.VISIBLE);
         btn_add.setVisibility(View.VISIBLE);
+        btn_help.setVisibility(View.INVISIBLE);
+    }
+
+    public void onClickHelp(View v){
+        Intent intent=new Intent(this,HelpActivity.class);
+        startActivity(intent);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.andriod.daigoutally;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.View;
@@ -111,7 +112,9 @@ public class StockAdapter extends BaseAdapter {
         holder.pos.setText(String.valueOf(i));
         holder.name.setText(String.valueOf(data.get(i).commodity));
         holder.quantity.setText(String.format("%d",data.get(i).quantity));
-        String pricecontent=String.format("%s - %.2f = %.2f",data.get(i).showprice.getString(),data.get(i).discount,data.get(i).showprice.nums-data.get(i).discount);
+        SharedPreferences sharedPreferences=context.getSharedPreferences("user_set",Context.MODE_PRIVATE);
+        String unitdafault=sharedPreferences.getString("unit","CNY");
+        String pricecontent=String.format("%s %.2f  %s %.2f",data.get(i).showprice.unit,data.get(i).showprice.nums-data.get(i).discount,unitdafault,data.get(i).showprice.nums*data.get(i).exrate);
         holder.price.setText(pricecontent);
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
         holder.date.setText(format1.format(data.get(i).date));

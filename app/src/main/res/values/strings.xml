@@ -36,7 +36,38 @@
     <string name="cancel">Cancel</string>
 
     <string name="hint_description">Please input your description!</string>
-    <string name="mark_intro">There is no mark yet. You can add a mark by taking picture and writing some description. Please click the button at the top left corner if you want to add mark.\n\nBy the way, application will record your location from GPS or the picture in your album!</string>
-    <string name="stock_intro">There is no stock yet. You can add a stock which you have bought. Please click the button at the top left corner if you want to add stock.</string>
-    <string name="order_intro">There is no order yet. You can add a order which you make deal with others. Please click the button at the top left corner if you want to add order.</string>
+    <string name="mark_intro">There is no mark yet.</string>
+    <string name="stock_intro">There is no stock yet.</string>
+    <string name="order_intro">There is no order yet.</string>
+
+    <string name="help_mark_detail">
+        1. Mark is the record of what you met sometime especially what you want to sell. You can take a picture and write description, and app will get the location from GPS or the picture
+         in the album if it has.\n\n
+        2. How to add the location info in picture? You can open it in the phone camera setting.\n\n
+        3. Short clicking the item will call a toolbar on which the three buttons is.\n\n
+        4. The first button is to see the mark detail including all description and location on map, the second button is to delete it and the third is to edit it.\n\n
+        5. You can long click the mark item to see the bigger picture.\n\n
+        6. The search button can help you to search marks, stocks, orders by the key word.\n
+    </string>
+    <string name="help_stock_detail">
+        1. Stock is the record of what you have bought. You can input the stock information in the stock add view (Click the plus button). \n\n
+        2. You can check the current exchange rate between the currency you paid and the default currency you set (default is CNY). \n\n
+        3. The type of currency is just the major currency in the world.\n\n
+        4. You also can use search to find what you want. \n
+    </string>
+    <string name="help_order_detail">
+        1. Order is the record of what you have made deal with others. It conclude the commodity you sold, the quantity, the price in the default currency you set.\n\n
+        2. As the mark and stock, it will show a toolbar when you click the item.\n\n
+        3. The first button is to change the state of the order, which concludes three types of 【No Shipped】,【Wait for Received】 and 【Has Received】.
+        Different state will make the item stroke show different color for red, yellow and green.\n\n
+        4. The second and third button is same as mark. \n
+    </string>
+    <string name="btn_help">Click for Help</string>
+    <string name="help_title">Welcome to DaigouTally!</string>
+    <string name="help_intro_detail">
+        1. DaigouTally is an application for those who are traveling or studying in foreign country and have time to buy some things for the domestic.\n\n
+        2. There are three function for you! \n\n
+        3. You can find the help in setting view all the time.\n
+    </string>
+    <string name="help_back">-----I\'m Ready-----</string>
 </resources>

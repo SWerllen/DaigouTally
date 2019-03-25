@@ -69,6 +69,7 @@ public class MarkFragment extends Fragment {
             }
         };
         lazyLoad();
+
         return mRootView;
     }
 
@@ -120,7 +121,6 @@ public class MarkFragment extends Fragment {
                 dataope=new MyDataOperation(getContext());
                 dataope.open();
                 marks = dataope.getmarks();
-                if(marks.size()==0) mRootView.findViewById(R.id.container_mark_introduction).setVisibility(View.VISIBLE);
 
                 arrayAdapter= new MarkAdapter(getContext(), marks,markOperation);
                 listView = mRootView.findViewById(R.id.mark_listview);
@@ -180,8 +180,6 @@ public class MarkFragment extends Fragment {
             listView = mRootView.findViewById(R.id.mark_listview);
             listView.setAdapter(arrayAdapter);
         }
-        if(marks.size()==0) mRootView.findViewById(R.id.container_mark_introduction).setVisibility(View.VISIBLE);
-        else mRootView.findViewById(R.id.container_mark_introduction).setVisibility(View.GONE);
         recovPosition();
         dataope.close();
     }
