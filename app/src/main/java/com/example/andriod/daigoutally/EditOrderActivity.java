@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +60,11 @@ public class EditOrderActivity extends AppCompatActivity {
         tv_commodity.requestFocus();
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M)
             StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorBackground),true);
+    }
+    @Override
+    protected void onStart() {
+        findViewById(R.id.pane_order).setAnimation(AnimationUtils.loadAnimation(getBaseContext(),R.anim.list_enter));
+        super.onStart();
     }
     public void onClickBack(View v){
         finish();

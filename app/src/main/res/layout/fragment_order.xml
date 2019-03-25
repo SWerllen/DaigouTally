@@ -3,6 +3,22 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/container_order_introduction"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/text_order_intro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/basic"
+            android:padding="32dp"
+            android:text="@string/order_intro"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/container_order_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

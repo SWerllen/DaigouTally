@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -58,6 +59,13 @@ public class EditMarkActivity extends AppCompatActivity {
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M)
             StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorBackground),true);
     }
+    @Override
+    protected void onStart() {
+        findViewById(R.id.pic_pane).setAnimation(AnimationUtils.loadAnimation(getBaseContext(),R.anim.list_enter));
+        findViewById(R.id.pane_mark).setAnimation(AnimationUtils.loadAnimation(getBaseContext(),R.anim.list_enter));
+        super.onStart();
+    }
+
     public void onClickBack(View v){
         finish();
     }

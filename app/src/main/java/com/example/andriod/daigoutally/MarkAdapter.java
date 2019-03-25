@@ -27,6 +27,7 @@ public class MarkAdapter extends BaseAdapter {
     public int lastposition=-1;
     private  int showexit=-1;
     private boolean[] isshowbtn;
+    private boolean[] isALL;
     BitmapDescriptor mapicon = BitmapDescriptorFactory
             .fromResource(R.drawable.icon_gcoding);
     MarkOperation markOperation;
@@ -35,6 +36,7 @@ public class MarkAdapter extends BaseAdapter {
         this.data = data;
         this.markOperation=markOperation;
         isshowbtn=new boolean[data.size()];
+        isALL=new boolean[data.size()];
     }
 
     @Override
@@ -149,6 +151,10 @@ public class MarkAdapter extends BaseAdapter {
             LatLng latLng=new LatLng(data.get(i).location.getLatitude(),data.get(i).location.getLongitude());
             MapStatusUpdate status1 = MapStatusUpdateFactory.newLatLng(latLng);
             holder.map.getMap().setMapStatus(status1);
+            if(!isALL[i]){
+                holder.map.setAnimation(AnimationUtils.loadAnimation(context,R.anim.map_expand));
+                isALL[i]=true;
+            }
 
             OverlayOptions option = new MarkerOptions()
                     .position(latLng)
@@ -156,6 +162,9 @@ public class MarkAdapter extends BaseAdapter {
             holder.map.getMap().addOverlay(option);
         }
         else{
+            if(isALL[i]){
+                isALL[i]=false;
+            }
             String add=(dec.length()>200)? "...":"";
             holder.decription.setText(dec.substring(0,Math.min(dec.length(),100))+add);
             holder.map.setVisibility(View.GONE);

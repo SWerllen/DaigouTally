@@ -75,12 +75,12 @@ public class MarkFragment extends Fragment {
     private void showPopueWindow(int pos){
         View popView = View.inflate(getContext(),R.layout.popuppic,null);
 
-        int weight = getResources().getDisplayMetrics().widthPixels;
-        int height = getResources().getDisplayMetrics().heightPixels*1/3;
+        int weight = getResources().getDisplayMetrics().widthPixels*9/10;
+        int height = getResources().getDisplayMetrics().heightPixels*3/4;
 
         ImageView temp=popView.findViewById(R.id.big_picture);
         marks.get(pos).unload();
-        marks.get(pos).loadbyheight(1000);
+        marks.get(pos).loadbyheight(height);
         temp.setImageBitmap(marks.get(pos).map);
         marks.get(pos).unload();
         marks.get(pos).loadbyheight(300);
@@ -100,7 +100,7 @@ public class MarkFragment extends Fragment {
         WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
         lp.alpha = 0.5f;
         getActivity().getWindow().setAttributes(lp);
-        popupWindow.showAtLocation(popView, Gravity.CENTER,0,50);
+        popupWindow.showAtLocation(popView, Gravity.CENTER,0,-50);
     }
     public void lazyLoad() {
         if (getUserVisibleHint() && mIsPrepared && !mIsInited) {
@@ -120,6 +120,7 @@ public class MarkFragment extends Fragment {
                 dataope=new MyDataOperation(getContext());
                 dataope.open();
                 marks = dataope.getmarks();
+                if(marks.size()==0) mRootView.findViewById(R.id.container_mark_introduction).setVisibility(View.VISIBLE);
 
                 arrayAdapter= new MarkAdapter(getContext(), marks,markOperation);
                 listView = mRootView.findViewById(R.id.mark_listview);
@@ -179,6 +180,8 @@ public class MarkFragment extends Fragment {
             listView = mRootView.findViewById(R.id.mark_listview);
             listView.setAdapter(arrayAdapter);
         }
+        if(marks.size()==0) mRootView.findViewById(R.id.container_mark_introduction).setVisibility(View.VISIBLE);
+        else mRootView.findViewById(R.id.container_mark_introduction).setVisibility(View.GONE);
         recovPosition();
         dataope.close();
     }

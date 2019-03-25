@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,12 @@ public class AddOrderActivity extends AppCompatActivity {
     }
     public void onClickBack(View v){
         finish();
+    }
+
+    @Override
+    protected void onStart() {
+        findViewById(R.id.pane_order).setAnimation(AnimationUtils.loadAnimation(getBaseContext(),R.anim.list_enter));
+        super.onStart();
     }
 
     public void onClickAdd(View v){

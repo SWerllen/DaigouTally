@@ -72,7 +72,7 @@ public class OrderFragment extends Fragment {
             public void run() {
                 dataope=new MyDataOperation(getContext());
                 orders = dataope.getOrders();
-
+                if(orders.size()==0) mRootView.findViewById(R.id.container_order_introduction).setVisibility(View.VISIBLE);
                 if(arrayAdapter==null)
                     arrayAdapter = new OrderAdapter(getContext(), orders, orderOperation);
                 listView = mRootView.findViewById(R.id.order_listview);
@@ -123,6 +123,9 @@ public class OrderFragment extends Fragment {
             arrayAdapter= new OrderAdapter(getContext(), searchOrders,orderOperation);
             listView.setAdapter(arrayAdapter);
         }
+        if(orders.size()==0) mRootView.findViewById(R.id.container_order_introduction).setVisibility(View.VISIBLE);
+        else mRootView.findViewById(R.id.container_order_introduction).setVisibility(View.GONE);
+
         dataope.close();
         mRootView.findViewById(R.id.container_order_empty).setVisibility(View.INVISIBLE);
         mRootView.findViewById(R.id.container_order).setVisibility(View.VISIBLE);

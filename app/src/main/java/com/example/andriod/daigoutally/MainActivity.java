@@ -1,19 +1,16 @@
 package com.example.andriod.daigoutally;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -34,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private MarkFragment  mMarkFragment;
     private SetFragment   mSetFragment;
     FragmentManager mFragmentManager = getSupportFragmentManager();
-
+    BottomNavigationView navigationView;
     public enum Jiemian{ORDER,STOCK,MARK,SET};
     Jiemian jiemian;
     boolean issearch=false;
@@ -42,29 +39,6 @@ public class MainActivity extends AppCompatActivity {
     Button btn_add;
     Button btn_search;
     TextView tv_search;
-
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA,
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.CHANGE_WIFI_STATE,
-            Manifest.permission.ACCESS_WIFI_STATE,
-            Manifest.permission.READ_PHONE_STATE};
-    private static int REQUEST_PERMISSION_CODE = 1;
-
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_PERMISSION_CODE) {
-            for (int i = 0; i < permissions.length; i++) {
-                Log.i("Request Permission:", "apply：" + permissions[i] + ",result：" + grantResults[i]);
-                if(grantResults[i]==-1) {
-                    finish();
-                }
-            }
-        }
-    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -113,12 +87,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M)
             StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorBackground),true);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_PERMISSION_CODE);
-        }
+
         btn_add=findViewById(R.id.btn_add);
         btn_search=findViewById(R.id.btn_search);
         tv_search=findViewById(R.id.tv_search);
+        navigationView=findViewById(R.id.navigation);
         tv_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -265,7 +238,8 @@ public class MainActivity extends AppCompatActivity {
             tv_search.requestFocus();
             InputMethodManager manager = ((InputMethodManager)getBaseContext().getSystemService(Context.INPUT_METHOD_SERVICE));
             if (manager != null) manager.showSoftInput(tv_search, 0);
-            findViewById(R.id.navigation).setVisibility(View.GONE);
+            navigationView.setVisibility(View.GONE);
+            navigationView.setAnimation(AnimationUtils.loadAnimation(this,R.anim.navigation_left));
         }
         else{
             issearch=false;
@@ -277,7 +251,8 @@ public class MainActivity extends AppCompatActivity {
             InputMethodManager manager = ((InputMethodManager)getBaseContext().getSystemService(Context.INPUT_METHOD_SERVICE));
             if (manager != null)
                 manager.hideSoftInputFromWindow(tv_search.getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
-            findViewById(R.id.navigation).setVisibility(View.VISIBLE);
+            navigationView.setVisibility(View.VISIBLE);
+            navigationView.setAnimation(AnimationUtils.loadAnimation(this,R.anim.navigation_enter));
             switch (jiemian) {
                 case ORDER:
                     mOrderFragment.closesearch();
@@ -307,5 +282,4 @@ public class MainActivity extends AppCompatActivity {
         btn_search.setVisibility(View.VISIBLE);
         btn_add.setVisibility(View.VISIBLE);
     }
-
 }

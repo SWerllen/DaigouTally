@@ -1,5 +1,6 @@
 package com.example.andriod.daigoutally;
 
+        import android.Manifest;
         import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
@@ -11,13 +12,16 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
+        import android.support.annotation.NonNull;
+        import android.support.v4.app.ActivityCompat;
+        import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
+        import android.view.animation.AnimationUtils;
+        import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -33,6 +37,17 @@ import java.util.List;
 
 
 public class AddMarkActivity extends AppCompatActivity {
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.CHANGE_WIFI_STATE,
+            Manifest.permission.ACCESS_WIFI_STATE,
+            Manifest.permission.READ_PHONE_STATE};
+    private static int REQUEST_PERMISSION_CODE = 1;
+
     private static final int RESULT_LOAD_IMAGE=1;
     private static final int RESULT_CAMERA_IMAGE=2;
     private static final int RESULT_ZOOM=3;
@@ -43,12 +58,27 @@ public class AddMarkActivity extends AppCompatActivity {
     ImageView picture;
     File image;
     Location mLocation=null;
-
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMISSION_CODE) {
+            for (int i = 0; i < permissions.length; i++) {
+                Log.i("Request Permission:", "apply：" + permissions[i] + ",result：" + grantResults[i]);
+                if(grantResults[i]==-1) {
+                    finish();
+                }
+            }
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_mark);
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_PERMISSION_CODE);
+        }
         picture=findViewById(R.id.picture);
+        picture.requestFocus();
         tv_description=findViewById(R.id.tv_description);
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M)
             StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorBackground),true);
@@ -84,6 +114,13 @@ public class AddMarkActivity extends AppCompatActivity {
     }
     public void onClickBack(View v){
         finish();
+    }
+
+    @Override
+    protected void onStart() {
+        findViewById(R.id.pic_pane).setAnimation(AnimationUtils.loadAnimation(getBaseContext(),R.anim.list_enter));
+        findViewById(R.id.pane_mark).setAnimation(AnimationUtils.loadAnimation(getBaseContext(),R.anim.list_enter));
+        super.onStart();
     }
 
     public void onClickAdd(View v){

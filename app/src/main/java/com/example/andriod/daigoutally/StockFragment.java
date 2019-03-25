@@ -70,7 +70,7 @@ public class StockFragment extends Fragment {
             public void run() {
                 dataope=new MyDataOperation(getContext());
                 stocks = dataope.getStocks();
-
+                if(stocks.size()==0) mRootView.findViewById(R.id.container_stock_introduction).setVisibility(View.VISIBLE);
                 arrayAdapter= new StockAdapter(getContext(), stocks,stockOperation);
                 listView = mRootView.findViewById(R.id.stock_listview);
                 listView.setAdapter(arrayAdapter);
@@ -116,6 +116,8 @@ public class StockFragment extends Fragment {
             listView = mRootView.findViewById(R.id.stock_listview);
             listView.setAdapter(arrayAdapter);
         }
+        if(stocks.size()==0) mRootView.findViewById(R.id.container_stock_introduction).setVisibility(View.VISIBLE);
+        else mRootView.findViewById(R.id.container_stock_introduction).setVisibility(View.GONE);
         recovPosition();
         dataope.close();
     }

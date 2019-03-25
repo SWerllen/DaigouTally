@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,8 @@ public class AddStockActivity extends AppCompatActivity {
         sp_priceunit=findViewById(R.id.pane_stock_priceunit_spinner);
         tv_discount=findViewById(R.id.pane_stock_discount_text);
         tv_exchhangerate=findViewById(R.id.pane_stock_exrate_text);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M)
+            StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorBackground),true);
         tv_commodity.requestFocus();
     }
 
@@ -94,10 +97,12 @@ public class AddStockActivity extends AppCompatActivity {
             ToastShow("Insert fail! Please check your input!");
             operation.close();
         }
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M)
-            StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorBackground),true);
     }
-
+    @Override
+    protected void onStart() {
+        findViewById(R.id.pane_stock).setAnimation(AnimationUtils.loadAnimation(getBaseContext(),R.anim.list_enter));
+        super.onStart();
+    }
     private void ToastShow(String s){
         Toast.makeText(getBaseContext(),s,Toast.LENGTH_SHORT).show();
     }

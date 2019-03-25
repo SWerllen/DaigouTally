@@ -7,10 +7,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/activityAnim</item>
     </style>
 
     <style name="PopupAnimation" parent="android:Animation" mce_bogus="1">
         <item name="android:windowEnterAnimation">@anim/popup_enter</item>
         <item name="android:windowExitAnimation">@anim/popup_exit</item>
     </style>
+
+    <style name="activityAnim">
+        <item name="android:activityOpenExitAnimation">@anim/window_openleft</item>
+        <item name="android:activityOpenEnterAnimation">@anim/window_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/window_left</item>
+    </style>
+
 </resources>
