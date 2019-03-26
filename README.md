@@ -3,5 +3,6 @@
 
 [![](/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png "Click here to see demo!")][demo]
 
+---------------------------------------
 
 [demo]:https://zhuanlan.zhihu.com/p/36835443 "demo"
