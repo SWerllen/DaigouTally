@@ -4,4 +4,4 @@
 [![](/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png "Click here to see demo!")][demo]
 
 
-[demo]:https://github.com/SWerllen/DaigouTally/blob/master/DaigouTally_Video_Demo.mp4 "demo"
+[demo]:https://zhuanlan.zhihu.com/p/36835443 "demo"
