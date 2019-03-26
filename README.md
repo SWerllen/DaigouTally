@@ -6,5 +6,5 @@
 [![](/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png "我的知乎，欢迎关注")][zhihu]
 ---------------------------------------
 
-[demo]:https://www.bilibili.com/ "demo"
+[demo]:https://github.com/SWerllen/DaigouTally/blob/master/DaigouTally_Video_Demo.mp4 "demo"
 [zhihu]:https://www.zhihu.com/people/jellywong "我的知乎，欢迎关注"
