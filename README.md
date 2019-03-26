@@ -1,5 +1,7 @@
-# DaigouTally
+### DaigouTally
  DaigouTally is an application for those who are traveling or studying in foreign country and have time to buy some things for the domestic.There are three function for you!
-<video src="https://github.com/SWerllen/DaigouTally/blob/master/DaigouTally_Video_Demo.mp4" width="320" height="240" controls="controls">
-Your browser does not support the video tag.
-</video>
+<iframe
+style="margin-left: 2px; margin-bottom:-5px;"
+frameborder="0" scrolling="0" width="100px" height="20px"
+src="https://github.com/SWerllen/DaigouTally/blob/master/DaigouTally_Video_Demo.mp4" >
+</iframe>
